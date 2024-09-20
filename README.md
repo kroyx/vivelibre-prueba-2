@@ -13,11 +13,6 @@ tecnologías:
 ## Dependencias
 Se han usado las siguientes librerías en el proyecto:
 
-Apache Commons:
-```xml
-<dependency>
-  <groupId>org.apache.commons</groupId>
-  <artifactId>commons-lang3</artifactId>
-  <version>3.17.0</version>
-</dependency>
-```
+- Apache Commons
+- JUnit
+- Mockito
