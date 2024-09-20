@@ -26,6 +26,9 @@ public class BookFilterService {
    * @return the most recently published book that contains the given string if found
    */
   private Optional<BookDate> filter(String filter, List<Book> books) {
+    if (Objects.isNull(books) || books.isEmpty()) {
+      return Optional.empty();
+    }
     // Show in the console those books that do not have a publication date
     books.forEach(book -> {
       if (Objects.isNull(book.getPublicationTimestamp())) {
@@ -69,7 +72,11 @@ public class BookFilterService {
    * @param book book to check if it contains the string
    * @return true if the book contains the string, false otherwise
    */
-  private boolean bookContainsText(String text, Book book) {
+  public boolean bookContainsText(String text, Book book) {
+    if (Objects.isNull(book) || StringUtils.isBlank(text)) {
+      return false;
+    }
+    
     return StringUtils.containsIgnoreCase(book.getTitle(), text)
         || StringUtils.containsIgnoreCase(book.getSummary(), text)
         || (Objects.nonNull(book.getAuthor()) && StringUtils.containsIgnoreCase(
@@ -83,8 +90,8 @@ public class BookFilterService {
    * @param timestamp string from which to extract the date
    * @return date as a string
    */
-  private String timestampDateToStringDate(String timestamp) {
-    if (Objects.isNull(timestamp)) {
+  public String timestampDateToStringDate(String timestamp) {
+    if (Objects.isNull(timestamp) || !StringUtils.isNumeric(timestamp)) {
       return null;
     }
     Instant instantDate = Instant.ofEpochMilli(Long.parseLong(timestamp));

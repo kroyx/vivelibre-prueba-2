@@ -1,5 +1,7 @@
 package com.vivelibree.domain;
 
+import java.util.Objects;
+
 public class Book {
   private Long id;
   private String title;
@@ -78,5 +80,23 @@ public class Book {
         ", summary='" + summary + '\'' +
         ", author=" + author +
         '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Book book = (Book) o;
+    return Objects.equals(getId(), book.getId()) && Objects.equals(getTitle(),
+        book.getTitle()) && Objects.equals(getPublicationTimestamp(),
+        book.getPublicationTimestamp()) && Objects.equals(getPages(), book.getPages())
+        && Objects.equals(getSummary(), book.getSummary()) && Objects.equals(
+        getAuthor(), book.getAuthor());
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getId(), getTitle(), getPublicationTimestamp(), getPages(), getSummary(),
+        getAuthor());
   }
 }
